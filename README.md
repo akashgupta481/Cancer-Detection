@@ -1,4 +1,4 @@
-![abee61f2-381c-427a-85b5-d37de842c547](https://github.com/akashgupta481/Dual-Cancer-Detection-Lungs-Breast/assets/126176668/50e45953-d1c0-4a4c-bf32-7eafbbee1002)## Cancer Detection Web App
+## Cancer Detection Web App
 
 Welcome to the Cancer Detection Web App repository! This project utilizes machine learning models to detect both lung and breast cancer, providing a user-friendly interface through a Flask-based web application.
 
