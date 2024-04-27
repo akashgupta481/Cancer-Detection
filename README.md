@@ -4,17 +4,17 @@ Welcome to the Cancer Detection Web App repository! This project utilizes machin
 
 ## Features
 
--Dual Cancer Detection: Our project incorporates machine learning models trained to detect both lung and breast cancer.
--Web Interface: Utilizing Flask, we've developed a sleek and intuitive web application for easy access to the cancer detection models.
--Efficient Diagnosis: With the power of AI, our models enable efficient and accurate diagnosis, potentially aiding in early detection and treatment.
+- Dual Cancer Detection: Our project incorporates machine learning models trained to detect both lung and breast cancer.
+- Web Interface: Utilizing Flask, we've developed a sleek and intuitive web application for easy access to the cancer detection models.
+- Efficient Diagnosis: With the power of AI, our models enable efficient and accurate diagnosis, potentially aiding in early detection and treatment.
 
 ## Usage
 
--Clone the repository to your local machine.
--Install the required dependencies using pip install -r requirements.txt.
--Run the Flask app by executing python app.py.
--Access the web application by navigating to http://localhost:5000 in your web browser.
--Upload relevant medical images for cancer detection and follow the on-screen instructions.
+- Clone the repository to your local machine.
+- Install the required dependencies using pip install -r requirements.txt.
+- Run the Flask app by executing python app.py.
+- Access the web application by navigating to http://localhost:5000 in your web browser.
+- Upload relevant medical images for cancer detection and follow the on-screen instructions.
 
 ## Contributions
 
