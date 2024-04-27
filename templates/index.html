@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Detection - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <div class="nav-bar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/lung-detection">Lung Cancer Detection</a></li>
+            <li><a href="/breast-detection">Breast Cancer Detection</a></li>
+            <li><a href="#" onclick="toggleContact()">Contact</a></li>
+        </ul>
+        <div class="logo">
+            <img src="https://i.postimg.cc/wBYnk9Q1/pngaaa-com-3723417.png" alt="Lung Cancer Logo">
+        </div>
+    </div>
+
+    <div class="home-page" id="home-page">
+        <div class="about-text">
+            <h1>CANCER</h1>
+            <p>
+                Cancer is a large group of diseases with one thing in common:<br> They all happen when normal cells
+                become
+                cancerous cells that multiply and spread.<br>
+    
+                Cancer is the second most common cause of death in the U.S.<br> But fewer people are dying of cancer now
+                than 20
+                years ago.<br> Early detection and innovative treatments are curing cancer and helping people with
+                cancer live
+                longer.<br> At the same time, medical researchers are identifying independent risk factors <br> linked
+                to developing
+                cancer to help prevent people from developing cancer. <br><br>
+                Who’s affected by cancer?
+
+Almost anyone may develop cancer, but data show cancer cases vary based on race and sex. According to the 2022 Annual Report on Cancer, the disease:<br>
+
+-Affects slightly more men and people AMAB than women and people AFAB.<br>
+-Affects more Black men (AMAB) than people in other racial groups.<br>
+-Affects more women (AFAB) who are American Indian or Alaska natives than people in other racial groups.<br>
+-Almost anyone may develop cancer, but it typically affects people aged 60 and older.<br>
+<img src="https://i.postimg.cc/MpNXm6t2/1-xh5-DTCs5-IWn-M67-HQqvo-E5g.webp" id="abt" alt="Lung Cancer Logo">
+<img src="https://i.postimg.cc/QxNqRmDN/cancer-infographic.jpg" id="abt2" alt="Lung Cancer Logo">
+            </p><br>
+        </div>
+        <div class="about-text">
+            <h3>LUNGS CANCER</h3>
+            <p>
+                Lung cancer is a kind of cancer that starts as a growth of cells in the lungs.<br> The lungs are two
+                spongy organs
+                in the chest that control breathing.<br>
+    
+                Lung cancer is the leading cause of cancer deaths worldwide.<br>
+    
+                People who smoke have the greatest risk of lung cancer. <br>The risk of lung cancer increases with the
+                length of
+                time and number of cigarettes smoked.<br> Quitting smoking, even after smoking for many years,
+                significantly lowers
+                the chances of developing lung cancer.<br>
+            <p>This is a Project which uses a Machine Learning Model to
+                Predict the <br>presence of Lung cancer by using CT Scan images of Lungs.</p>
+            </p>
+        </div>
+        <div class="about-text">
+            <h3>BREAST CANCER</h3>
+            <p>
+                Breast cancer is a prevalent form of cancer that begins in the cells of the breast.<br> It can affect
+                both men and women, although it is much more common in women.<br>
+    
+                Breast cancer occurs when abnormal cells in the breast tissue grow and divide uncontrollably, forming a
+                tumor.<br>
+    
+                There are several types of breast cancer, with the most common being <br>invasive ductal carcinoma,
+                which starts in the milk ducts and can spread to other parts of the breast or body.<br> Other types
+                include invasive lobular carcinoma, ductal carcinoma in situ (DCIS), and inflammatory breast cancer.<br>
+            <p>This is a Project which uses a Machine Learning Model to
+                Predict the <br>presence of Breast cancer by using CT Scan images of Breasts.</p>
+            </p>
+        </div>
+    </div>
+    
+    <div class="contact-page" id="contact-page">
+        <h2>Contact Us</h2>
+        <p>Email: akashgupta0919@gmail.com</p>
+        <p>Phone: +91 8516852232</p>
+        <p style="text-align:center">Copyright © 2024 Lungs | Breast Cancer Detection</p>
+    </div>
+
+    <script>
+        function uploadImage(type) {
+            var fileInput;
+            if (type === 'lung') {
+                fileInput = document.getElementById('fileInputLung');
+            } else if (type === 'breast') {
+                fileInput = document.getElementById('fileInputBreast');
+            }
+            fileInput.click();
+
+            fileInput.addEventListener('change', function () {
+                var file = fileInput.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function (e) {
+                        var image;
+                        if (type === 'lung') {
+                            image = document.getElementById('uploadedImageLung');
+                        } else if (type === 'breast') {
+                            image = document.getElementById('uploadedImageBreast');
+                        }
+                        image.src = e.target.result;
+                        image.parentElement.style.display = 'block';
+                        resizeImage(image);
+                        predictImage(file, type);
+                    };
+                }
+            });
+        }
+
+        function resizeImage(image) {
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            canvas.width = 400; // Fixed width
+            canvas.height = 300; // Fixed height
+            ctx.drawImage(image, 0, 0, 400, 300);
+            var resizedDataUrl = canvas.toDataURL('image/jpeg', 0.5); // Resize to JPEG with quality 0.5 (adjust as needed)
+            image.src = resizedDataUrl;
+        }
+
+        function predictImage(file, type) {
+            var formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/predict', {
+                method: 'POST',
+                body: formData,
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    var predictionLabel;
+                    var uploadAgainButton;
+                    if (type === 'lung') {
+                        predictionLabel = document.getElementById('predictionLabelLung');
+                        uploadAgainButton = document.getElementById('upload-again-button-lung');
+                    } else if (type === 'breast') {
+                        predictionLabel = document.getElementById('predictionLabelBreast');
+                        uploadAgainButton = document.getElementById('upload-again-button-breast');
+                    }
+
+                    predictionLabel.textContent = data.prediction;
+                    if (data.prediction === 'Normal') {
+                        predictionLabel.style.color = 'green';
+                    } else {
+                        predictionLabel.style.color = 'red';
+                    }
+                    predictionLabel.style.display = 'block';
+                    uploadAgainButton.style.display = 'block';
+                    document.querySelector('.upload-button').style.display = 'none';
+                })
+                .catch((error) => console.error('Error:', error));
+        }
+
+        function uploadAgain(type) {
+            location.reload();
+        }
+
+        function toggleContact() {
+            var contactPage = document.getElementById('contact-page');
+            contactPage.classList.toggle('show');
+        }
+    </script>
+</body>
+
+</html>
