@@ -8,11 +8,11 @@ import os
 app = Flask(__name__)
 
 # Load the Lung Cancer Detection model
-lung_model_path = "/Users/akash/MCA Academics/Minor Project/Cancer Detection Project/model.h5"
+lung_model_path = "model.h5"
 lung_model = load_model(lung_model_path)
 
 # Load the Breast Cancer Detection model
-breast_model_path = "/Users/akash/MCA Academics/Minor Project/Cancer Detection Project/breast_cancer_model.h5"
+breast_model_path = "breast_cancer_model.h5"
 breast_model = load_model(breast_model_path)
 
 # Define function to preprocess image for Lung Cancer Detection
