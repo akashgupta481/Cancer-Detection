@@ -30,6 +30,5 @@ wcwidth==0.2.13
 Pillow
 numpy
 keras
-os
 flask
 gunicorn
